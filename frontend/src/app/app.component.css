@@ -1,0 +1,28 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.country-code {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.country-code-field {
+  width: 25%;
+}
+
+.state-field {
+  display: flex;
+  justify-content: center;
+  height: 0%;
+  width: 25%;
+}

@@ -1,0 +1,53 @@
+<div class="country-code">
+  <mat-form-field class="country-code-field">
+    <mat-label>Country Code Filter</mat-label>
+    <input matInput (keyup)="applyCountryFilter()" placeholder="Ex. 212" #countryFilter>
+  </mat-form-field>
+
+  <div class="state-field">
+    <mat-button-toggle-group name="state">
+      <mat-button-toggle value="non" (change)="stateChange($event.value)">None</mat-button-toggle>
+      <mat-button-toggle value="true" (change)="stateChange($event.value)">Valid</mat-button-toggle>
+      <mat-button-toggle value="false" (change)="stateChange($event.value)">Invalid</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+</div>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="applySort($event)">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
+      <td mat-cell *matCellDef="let row"> {{row.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="countryCode">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Country Code</th>
+      <td mat-cell *matCellDef="let row"> {{row.countryCode}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> State</th>
+      <td mat-cell *matCellDef="let row" [style.color]="row.state"> {{row.state}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{countryFilter.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSize]="pageSize" [length]="totalSize" (page)="updatePage($event)"
+                 [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+
+
+
