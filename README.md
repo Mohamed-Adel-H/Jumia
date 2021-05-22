@@ -39,4 +39,13 @@ Start using docker compose
 docker-compose up
 ```
 
+
+
+###Backend Structure:
+![alt text](https://user-images.githubusercontent.com/57498054/119237401-dfacae80-bb3c-11eb-8735-9037a88a13de.png "Backend Structure")
+
+ 
+###Frontend Structure:
+![alt text](https://user-images.githubusercontent.com/57498054/119237398-dcb1be00-bb3c-11eb-8159-9b08749f95a9.png "Frontend Structure")
+
  
