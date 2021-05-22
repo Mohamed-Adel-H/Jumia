@@ -10,15 +10,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/customer")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class CustomerController {
 
+    Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
     ControllerUtil controllerUtil;
     CustomerService customerService;
@@ -54,9 +58,10 @@ public class CustomerController {
             response.put("currentPage", pageTuts.getNumber());
             response.put("totalItems", pageTuts.getTotalElements());
             response.put("totalPages", pageTuts.getTotalPages());
-
+            logger.info("GET Customer Contacts ", response);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
+            logger.error("GET Customer Contacts ", e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

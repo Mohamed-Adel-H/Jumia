@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  database:
+    build: ./database/
+    volumes:
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "8000:8000"
+    restart: always
+    networks:
+      - backend
+
+  back-server:
+    build: ./backend/
+    ports:
+      - 8080:8080
+    links:
+      - database
+    depends_on:
+      - database
+    restart: always
+    networks:
+      - backend
+      - frontend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:sqlite:sample.db
+
+  front-server:
+    build: ./frontend/
+    links:
+      - back-server
+    ports:
+      - 4200:4200
+    depends_on:
+      - back-server
+    networks:
+      - frontend
+
+networks:
+  backend:
+  frontend:
